@@ -48,8 +48,22 @@ public class ConvertActivityTest {
                 .check(matches(withText(mStringToBetyped)));
 
         onView(withId(R.id.fahrenheitValue))
-                .check(matches(withText("41,00"))); // формат вывода два знака после запятой
+                .check(matches(withText("41.00"))); // формат вывода два знака после запятой
 
+    }
+
+    @Test
+    public void ConvertActivity_toMetersPerSecondButton_Test() {
+        String kmPerHourValue = "100";
+        onView(withId(R.id.et_kilometers_per_hour_value))
+                .perform(typeText(kmPerHourValue), closeSoftKeyboard());
+        onView(withId(R.id.bt_convert_to_meters_per_second)).perform(click());
+
+        onView(withId(R.id.et_kilometers_per_hour_value))
+                .check(matches(withText(kmPerHourValue)));
+
+        onView(withId(R.id.et_meters_per_second_value))
+                .check(matches(withText("27.78")));
     }
 
     @Test

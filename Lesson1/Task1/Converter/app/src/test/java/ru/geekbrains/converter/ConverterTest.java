@@ -69,4 +69,19 @@ public class ConverterTest {
         assertThat(actual, is(1.24274f));
     }
 
+    @Test
+    public void ConvertToMetersPerSecond_Do_UnitTest() {
+        ConvertTo convertTo = new ConvertToMetersPerSecond();
+        float actual = convertTo.Do(100);
+        assertThat(actual, is(27.777779f));
+    }
+
+    @Test
+    public void ConvertToMetersPerSecond_IntegrationTest() {
+        float sourceValue = 100;
+        Converter converter = new Converter(sourceValue);
+        float actual = converter.Convert(new ConvertToMetersPerSecond()).GetResult();
+        assertThat(actual, is(27.777779f));
+    }
+
 }
