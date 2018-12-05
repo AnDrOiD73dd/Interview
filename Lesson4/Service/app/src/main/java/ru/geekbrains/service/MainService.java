@@ -11,6 +11,9 @@ import android.support.v4.app.TaskStackBuilder;
 
 // Служба
 public class MainService extends IntentService {
+
+    public static final String KEY_PARAM = "key number";
+
     int messageId=0;
 
     public MainService() {
@@ -28,6 +31,10 @@ public class MainService extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         makeNote("onStartCommand");
+        if (intent.hasExtra(KEY_PARAM)) {
+            String number = intent.getStringExtra(KEY_PARAM);
+            makeNote(number);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
     @Override
