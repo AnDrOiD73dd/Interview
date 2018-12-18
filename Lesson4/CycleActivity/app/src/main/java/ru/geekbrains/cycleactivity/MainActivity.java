@@ -1,6 +1,7 @@
 package ru.geekbrains.cycleactivity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +20,20 @@ public class MainActivity extends AppCompatActivity {
         firstRunTextView = (TextView) findViewById(R.id.textViewInfo);
         if (savedInstanceState == null){
             firstRunTextView.setText("Первый запуск!");
+            showPlusOneFragment();
         }
         else{
             firstRunTextView.setText("Повторный запуск!");
         }
         makeMessage("onCreate()");
+    }
+
+    private void showPlusOneFragment() {
+        PlusOneFragment fragment = PlusOneFragment.newInstance("param1", "param2");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, PlusOneFragment.TAG)
+                .commit();
     }
 
     @Override
